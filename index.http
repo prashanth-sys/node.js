@@ -1,23 +1,47 @@
-GET http://localhost:3000/tasks/ 
+GET http://localhost:3000/tasks/   
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcmlzIiwiaWF0IjoxNzE0NTY1NDkzfQ.ICmHnf1ris7PrnoSKDuCfg4FK3u8Q3Ml6czQifrgT_E
+
 
 ### 
+
+GET http://localhost:3000/tasks/125
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcmlzIiwiaWF0IjoxNzE0NTY1NDkzfQ.ICmHnf1ris7PrnoSKDuCfg4FK3u8Q3Ml6czQifrgT_E
+
+###
 
 POST http://localhost:3000/users/
 Content-Type: application/json 
 
 {
-    "id":"9",
-    "username":"ram",
-    "password":"ram357",
-    "email":"shiva@example.com"
+    "id":"11",
+    "username":"haris",
+    "password":"hari359",
+    "email":"hari@example.com"
 } 
 
 ### 
 
-POST http://localhost:3000/login/
+
+POST http://localhost:3000/login/ 
 Content-Type: application/json 
 
 {
-    "username":"John",
-    "password":"password123"
+    "username":"haris",
+    "password":"hari359"
+}
+
+### 
+
+POST http://localhost:3000/tasks
+Content-Type: application/json 
+
+{
+    "id":"145",
+    "title": "Project Review Meeting",
+    "description": "Deploy the project to production servers.",
+    "assigneeId": "user456",
+    "status": "Not Started",
+    "createdAt": "2024-05-08T09:45:00Z",
+    "updatedAt": "2024-05-08T10:30:00Z",
+
 }
