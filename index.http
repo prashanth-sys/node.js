@@ -36,12 +36,31 @@ POST http://localhost:3000/tasks
 Content-Type: application/json 
 
 {
-    "id":"145",
+    "id": "14",
     "title": "Project Review Meeting",
     "description": "Deploy the project to production servers.",
     "assigneeId": "user456",
     "status": "Not Started",
     "createdAt": "2024-05-08T09:45:00Z",
-    "updatedAt": "2024-05-08T10:30:00Z",
+    "updatedAt": "2024-05-08T10:30:00Z"
+
 
 }
+
+### 
+
+PUT http://localhost:3000/tasks/125 
+Content-Type: application/json 
+
+{
+    "id":"125",
+    "title":"Develop Frontend API",
+    "description":"Implement frontend API endpoints",
+    "assigneeId": "user459",
+    "createdAt":"2024-05-08T09:45:00Z",
+    "updatedAt":"2024-05-08T10:30:00Z"
+}
+
+### 
+
+DELETE http://localhost:3000/tasks/29

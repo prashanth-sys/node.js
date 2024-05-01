@@ -173,5 +173,57 @@ app.post("/tasks", async (request, response) => {
     ("${id}", "${title}", "${description}", "${assigneeId}", "${status}", "${createdAt}", "${updatedAt}");
     `;
   const dbResponse = await db.run(addTaskQuery);
-  response.send("Updated Successfully");
+  response.send("Task Created Successfully");
+});
+
+// PUT API
+
+// PUT API to update a task
+app.put("/tasks/:taskId", async (request, response) => {
+  const { taskId } = request.params;
+  const taskDetails = request.body;
+  const {
+    id,
+    title,
+    description,
+    assigneeId,
+    status,
+    createdAt,
+    updatedAt,
+  } = taskDetails;
+
+  // Construct the SQL query to update the task
+  const updateTaskQuery = `
+      UPDATE Tasks
+      SET 
+        id= "${id}",
+        title = "${title}",
+        description = "${description}",
+        assignee_id = "${assigneeId}",
+        status = "${status}",
+        created_at="${createdAt}",
+        updated_at = "${updatedAt}"
+      WHERE 
+        id = ${taskId}`;
+
+  // Execute the SQL query to update the task in the database
+  await db.run(updateTaskQuery);
+  response.send("Task updated successfully");
+});
+
+//DELETE API
+
+app.delete("/tasks/:taskId", async (request, response) => {
+  const { taskId } = request.params;
+
+  // Construct the SQL query to delete the task
+  const deleteTaskQuery = `
+      DELETE FROM Tasks
+      WHERE 
+        id = ${taskId}`;
+
+  // Execute the SQL query to delete the task from the database
+  await db.run(deleteTaskQuery);
+
+  response.send("Task deleted successfully");
 });
