@@ -1,0 +1,23 @@
+GET http://localhost:3000/tasks/ 
+
+### 
+
+POST http://localhost:3000/users/
+Content-Type: application/json 
+
+{
+    "id":"7",
+    "username":"parvathi",
+    "password":"shiva123",
+    "email":"shiva@example.com"
+} 
+
+### 
+
+POST http://localhost:3000/login
+Content-Type: application/json 
+
+{
+    "username":"prashanth357",
+    "password":"prarush357"
+}
