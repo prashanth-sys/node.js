@@ -3,7 +3,7 @@ const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
 const path = require("path");
 const bcrypt = require("bcrypt");
-const jwtToken = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const app = express();
 
 app.use(express.json());
@@ -59,13 +59,13 @@ app.post("/users/", async (request, response) => {
   if (dbUser === undefined) {
     // create user in users table
     const createUserQuery = `
-    INSERT INTO 
+   INSERT INTO 
     users(id,username,password,email)
     VALUES
     (
         "${id}",
         "${username}",
-        "${password}",
+        "${hashedPassword}",
         "${email}"
     );`;
     await db.run(createUserQuery);
@@ -78,21 +78,26 @@ app.post("/users/", async (request, response) => {
 });
 
 //User Login API
-app.post("/login", async (request, response) => {
+app.post("/login/", async (request, response) => {
   const { username, password } = request.body;
-  const selectUserQuery = `SELECT * FROM users WHERE username = '${username}'`;
+  const selectUserQuery = `
+  SELECT 
+  *
+  FROM 
+  users
+  WHERE 
+  username = "${username}"`;
   const dbUser = await db.get(selectUserQuery);
   if (dbUser === undefined) {
+    //user doesn't exist
     response.status(400);
-    response.send("Invalid User");
+    response.send("Invalid user");
   } else {
+    //compare password, hashed password
     const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
     if (isPasswordMatched === true) {
-      console.log("login success");
-      const payload = {
-        username: username,
-      };
-      const jwtToken = jwt.sign(payload, "MY_SECRET_TOKEN");
+      const payload = { username: username };
+      const jwtToken = jwt.sign(payload, "MY_JWT_TOKE_SP");
       response.send({ jwtToken });
     } else {
       response.status(400);

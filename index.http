@@ -6,18 +6,18 @@ POST http://localhost:3000/users/
 Content-Type: application/json 
 
 {
-    "id":"7",
-    "username":"parvathi",
-    "password":"shiva123",
+    "id":"9",
+    "username":"ram",
+    "password":"ram357",
     "email":"shiva@example.com"
 } 
 
 ### 
 
-POST http://localhost:3000/login
+POST http://localhost:3000/login/
 Content-Type: application/json 
 
 {
-    "username":"parvathi",
-    "password":"shiva123"
+    "username":"John",
+    "password":"password123"
 }
